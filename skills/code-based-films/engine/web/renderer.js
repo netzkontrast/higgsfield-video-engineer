@@ -189,6 +189,7 @@ class PT {
     const dispatch = async (k) => {
       const rows = Math.ceil(H / stripes);
       for (let s = 0; s < stripes; s++) {
+        if (H - s * rows <= 0) break;
         params[2] = done; params[3] = k; params[19] = s * rows; // dims.z, dims.w, cfg4.w
         dev.queue.writeBuffer(this.ub, 0, params);
         const e = dev.createCommandEncoder();
@@ -205,7 +206,8 @@ class PT {
     let t = performance.now();
     await dispatch(1); done = 1;
     let perSample = performance.now() - t;
-    if (perSample > 400) { stripes = Math.ceil(perSample / 150); log(`heavy frame: ${perSample.toFixed(0)} ms/spp -> ${stripes} stripes per dispatch`); }
+    // at most one stripe per 8-pixel row of workgroups, or later stripes get an empty or negative dispatch
+    if (perSample > 400) { stripes = Math.min(Math.ceil(perSample / 150), Math.ceil(H / 8)); log(`heavy frame: ${perSample.toFixed(0)} ms/spp -> ${stripes} stripes per dispatch`); }
     else spd = Math.max(1, Math.min(64, Math.floor(target / perSample)));
     let lastLog = performance.now();
     while (done < spp) {

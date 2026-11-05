@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "ai-video-generation": {
+      "source": "inference-sh/skills",
+      "sourceType": "github",
+      "skillPath": "tools/video/ai-video-generation/SKILL.md",
+      "computedHash": "24b338eea9c7fad5215b732c8395ccd2144d5400371cc09585776184df80e711"
+    },
+    "frontend-ui-engineering": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-ui-engineering/SKILL.md",
+      "computedHash": "22ee43d0367d2c3f611585eead5f0c413bcefa947da34b25a4935726ed76533e"
+    },
+    "write-concisely": {
+      "source": "NeoLabHQ/context-engineering-kit",
+      "sourceType": "github",
+      "skillPath": "skills/write-concisely/SKILL.md",
+      "computedHash": "785b6367f985aa9f11ddad41b63b1f58d99f0547e4136b8c188dae6ab913fa74"
+    }
+  }
+}

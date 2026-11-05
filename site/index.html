@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Higgsfield Video Engineer</title>
+<meta name="description" content="Short animated films where every frame is drawn by code and rendered by our own WebGPU path tracer on your own GPU.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #0B0D17; --surface: #1A1D24; --text: #ECEEF2; --muted: #9AA0AC; --subtle: #8F94A0;
+    --accent: #D9D16B; --line: rgba(236, 238, 242, 0.14);
+    --sans: 'Space Grotesk', system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  header { border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; flex-wrap: wrap; }
+  .brand { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .brand::before { content: ""; width: 8px; height: 8px; background: var(--accent); }
+  .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1.08; letter-spacing: -0.03em; margin: 16px 0; max-width: 18ch; text-wrap: balance; }
+  h2 { font-size: 24px; letter-spacing: -0.02em; margin: 0 0 16px; }
+  p { margin: 0 0 12px; max-width: 64ch; }
+  .lead { font-size: 18px; color: var(--muted); }
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  .hero { padding-top: 64px; }
+  .frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
+  figure { margin: 0; }
+  figure img, figure video { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: #000; }
+  figcaption { font-family: var(--mono); font-size: 12px; color: var(--subtle); margin-top: 8px; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { border: 1px solid var(--line); padding: 20px; }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  ol.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); counter-reset: s; }
+  ol.steps li { counter-increment: s; padding: 14px 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 14px; }
+  ol.steps li::before { content: counter(s, decimal-leading-zero); display: block; font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 4px; }
+  pre { margin: 0; padding: 16px; overflow-x: auto; background: var(--surface); border: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.75; color: var(--text); }
+  pre .c { color: var(--subtle); }
+  footer { padding: 32px 0 48px; color: var(--subtle); font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="brand">Higgsfield Video Engineer</span>
+    <a href="https://github.com/higgsfield-ai/higgsfield-video-engineer">Source on GitHub</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="label">Code-based films</span>
+      <h1>Short animated films where every frame is drawn by code.</h1>
+      <p class="lead">The characters, the set, the movement and the sound are all written as code. Our own renderer turns that code into pictures on your computer's graphics card. An AI agent can run the whole process, from the story to the finished video.</p>
+      <div class="frames">
+        <figure>
+          <img src="frame_S1.jpg" width="1440" height="1080" alt="A felt chick in its nest at night, made from code">
+          <figcaption>Good Morning! · shot S1 · rendered from code</figcaption>
+        </figure>
+        <figure>
+          <img src="frame_S6.jpg" width="1440" height="1080" alt="The felt chick and the paper sun in the morning, made from code">
+          <figcaption>Good Morning! · shot S6 · about 40 s per frame on an M4 Max</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>What makes it different</h2>
+      <div class="grid3">
+        <div class="card"><h3>Runs on your own computer</h3><p>No accounts and no cloud. Mac, Windows and Linux. Renting faster GPUs online is optional.</p></div>
+        <div class="card"><h3>Everything is our own</h3><p>No outside 3D software. Felt, paper, clay, glass, smoke, blur and soft focus come from our own path tracer.</p></div>
+        <div class="card"><h3>Safe to stop and restart</h3><p>Every frame is a pure function of its number, so a render can stop at any time and continue later, or redo one frame.</p></div>
+        <div class="card"><h3>Made for AI agents</h3><p>One install gives an agent the renderer, the tools and the step-by-step process.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>From story to delivered film</h2>
+      <p class="lead">Each step has a gate. Generated images are only a target to compare against; they never appear in the film.</p>
+      <ol class="steps">
+        <li>Story</li><li>Music and bar map</li><li>Beat sheet</li><li>Styleframes</li>
+        <li>Assets in code</li><li>Animatic</li><li>Notes pass</li><li>Light and look</li>
+        <li>Final render</li><li>Post and sound</li><li>QA</li><li>IP check and delivery</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Get started</h2>
+      <p>You need Node.js 22.12 or newer, Google Chrome and FFmpeg. Python 3.11+ is optional.</p>
+<pre><span class="c"># check your computer, then make a test picture</span>
+git clone https://github.com/higgsfield-ai/higgsfield-video-engineer
+cd higgsfield-video-engineer
+bin/hve setup
+bin/hve hello
+
+<span class="c"># the 20-second example film: a quick preview with title and sound</span>
+bin/hve example --quality preview --encode
+
+<span class="c"># start your own film</span>
+bin/hve new my-film</pre>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">MIT licence. Example film and renderer from the higgsfield-video-engineer repository.</div>
+</footer>
+</body>
+</html>
